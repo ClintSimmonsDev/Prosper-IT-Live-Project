@@ -1,0 +1,35 @@
+{% extends 'Airport_Code_Base.html' %}
+
+{% block content %}
+<style> 
+    .Airport_Code { 
+        color: blue
+        } 
+</style>
+<br>
+<h1>Search for City by Airport Code</h1>
+<br>
+
+    <form class="form-inline my-2 my-lg-0" method="POST">
+        {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="user_search">
+      <button class="btn btn-light btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>  
+    <br>
+    
+    {% if Code %}  
+        <table class="table table-bordered"> 
+        <tr class="table-secondary">
+            <td><center><a href="{% url 'city_search' %}"></a><h4>The <strong>City</strong> that matches {{ Code }} is:</h4></center>
+                <h1 class="Airport_Code"><center>{{ City }}</h1></center></div>
+            </td>
+        </tr>
+        </table>
+        {% elif Error %}
+            <table class="table table-bordered"> 
+                    <tr class="table-secondary">
+                        <td><center><a href="{% url 'city_search' %}"></a><h4>{{ Error }}</h4></center></td>
+                    </tr>
+            </table> 
+    {% endif %}
+{% endblock %}

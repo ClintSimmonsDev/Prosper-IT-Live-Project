@@ -1,0 +1,26 @@
+{% extends "Travelogue_base.html" %}
+{% load static from staticfiles %}
+
+{% block page_content %}
+<br>
+<h1 style="text-align: center;">Travelogue</h1>
+<br>
+<div class="col-md-8 offset-md-2">
+    <h2>Recent Entries:</h2>
+    <hr>
+    {% for post in posts %}
+    <h2><a href="{% url 'post_detail' post.pk%}">{{ post.title }}</a></h2>
+    <small>
+        {{ post.created_on.date }} |&nbsp;
+        Location:&nbsp;{{ post.location }} |&nbsp;
+        Categories:&nbsp;
+        {% for category in post.categories.all %}
+        <a href="{% url 'Travelogue_category' category.name %}">
+            {{ category.name }}
+        </a>&nbsp;
+        {% endfor %}
+    </small>
+    <p>{{ post.body | slice:":400" }}...</p>
+    {% endfor %}
+</div>
+{% endblock %}

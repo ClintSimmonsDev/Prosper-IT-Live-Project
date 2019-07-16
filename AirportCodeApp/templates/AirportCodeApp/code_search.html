@@ -1,0 +1,25 @@
+{% extends 'Airport_Code_Base.html' %}
+
+{% block content %}
+<br>
+<h1>Search for City by Airport Code</h1>
+<br>
+    <form class="form-inline my-2 my-lg-0" method="GET">
+        {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="user_search">
+      <button class="btn btn-light btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+    </form>  
+
+
+{% if selected_code %}
+    <table class="table table-bordered table-white">
+    {% for code in selected_code %}
+        <tr class="table-secondary">
+            <td><center><a href="{% url 'code_search' %}"><h4>{{ code }}</h4></a></center></td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endif %}
+
+
+{% endblock %}
